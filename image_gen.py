@@ -60,16 +60,17 @@ def window_mask(width, height, img_ref, center, level):
 
 
 # Make a list of test images
-images = glob.glob('./test_images/test*.jpg')
+# images = glob.glob('./test_images/test*.jpg')
+images = glob.glob('./test_images/*.jpg')
 
 for idx, fname in enumerate(images):
     img = cv2.imread(fname)
 
-    # 2. Distortion Correction
+    # 1. Distortion Correction
     # Undistorting an image using mtx and dist
     img = cv2.undistort(img, mtx, dist, None, mtx)
 
-    # 3. Color/Gradient Threshold
+    # 2. Color/Gradient Threshold
     # Generate binary image
     binary_img = np.zeros_like(img[:, :, 0])
     gradx = abs_sobel_thresh(img, orient='x', thresh=(12, 255))
@@ -77,7 +78,7 @@ for idx, fname in enumerate(images):
     color_binary = color_threshold(img, s_thresh=(100, 255), v_thresh=(50, 255))
     binary_img[(gradx == 1) & (grady == 1) | (color_binary == 1)] = 255
 
-    # 4. Perspective Transform
+    # 3. Perspective Transform
     # Perspective transform area
     img_size = (img.shape[1], img.shape[0])    # (width, height)
     bottom_trap_width = 0.76    # Percentage of trapezoid bottom width
@@ -107,7 +108,7 @@ for idx, fname in enumerate(images):
     # Warp an image using the perspective transform, M
     warped_img = cv2.warpPerspective(binary_img, M, img_size)
 
-    # 5. Detect Lane Lines using Convolution
+    # 4. Detect Lane Lines using Convolution
     window_width = 25
     window_height = 80    # Break image into 9 vertical layers since image height is 720
     margin = 25
@@ -202,7 +203,7 @@ for idx, fname in enumerate(images):
     base_img = cv2.addWeighted(img, 1.0, road_warped_back_img, -1.0, 0.0)
     output_img = cv2.addWeighted(base_img, 1.0, road_warped_img, 0.7, 0.0)
 
-    # 6. Determine the lane curvature
+    # 5. Determine the lane curvature
     # Curvature of left lane
     xm_per_pix = curve_centers.xm_per_pix
     ym_per_pix = curve_centers.ym_per_pix
@@ -233,6 +234,6 @@ for idx, fname in enumerate(images):
     cv2.putText(output_img, 'Car is ' + str(abs(round(center_diff, 3))) + 'm ' + camera_pos + ' from lane center.',
                 (50, 100), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2)
 
-    # Output Image
-    wname = './test_images/tracked' + str(idx) + '.jpg'
+    # Save the Output Image
+    wname = './test_images/tracked' + str(idx + 1) + '.jpg'
     cv2.imwrite(wname, output_img)
