@@ -247,5 +247,5 @@ input_video = 'project_video.mp4'
 # Identify the lane boundaries in an input_video from a front-facing camera on a
 # car and save an output_video.
 input_clip = VideoFileClip(input_video)
-output_clip = input_clip.f1_image(process_image)
+output_clip = input_clip.fl_image(process_image)
 output_clip.write_videofile(output_video, audio=False)
