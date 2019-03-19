@@ -241,8 +241,8 @@ def process_image(img):
     return output_img
 
 
-output_video = 'project_output_video.mp4'
-input_video = 'project_video.mp4'
+input_video = input('Enter input video filename: ')
+output_video = input_video.split('.')[0] + '_output.mp4'
 
 # Identify the lane boundaries in an input_video from a front-facing camera on a
 # car and save an output_video.
