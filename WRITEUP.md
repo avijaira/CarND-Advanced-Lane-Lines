@@ -42,7 +42,7 @@ The code for this pipeline is contained in the following script: `video_gen.py`.
 
 #### 1. Apply distortion correction to raw images.
 
-The code for this step is contained in the following script: `video_gen.py`. Reading the saved camera matrix and distortion coefficients between lines: `8-10`. Applying distortion correction in line: `75`.
+The code for this step is contained in the following script: `video_gen.py`. Reading the saved camera matrix and distortion coefficients between lines: `8-10`. Distortion correction is applied to input images on line: `75`.
 
 Test Image: ![alt text][image3]
 Undistorted Test Image: ![alt text][image4]
@@ -58,33 +58,22 @@ Binary Test Image: ![alt text][image5]
 
 The code for this step is contained in the following script: `video_gen.py`. The perspective transform is applied to binary images between lines: `87-113`.
 
-The `warper()` function takes as inputs an image (`img`), as well as source (`src`) and destination (`dst`) points.  I chose the hardcode the source and destination points in the following manner:
+I chose to hardcode the source and destination points in the following manner:
 
 ```python
-src = np.float32(
-    [[(img_size[0] / 2) - 55, img_size[1] / 2 + 100],
-    [((img_size[0] / 6) - 10), img_size[1]],
-    [(img_size[0] * 5 / 6) + 60, img_size[1]],
-    [(img_size[0] / 2 + 55), img_size[1] / 2 + 100]])
-dst = np.float32(
-    [[(img_size[0] / 4), 0],
-    [(img_size[0] / 4), img_size[1]],
-    [(img_size[0] * 3 / 4), img_size[1]],
-    [(img_size[0] * 3 / 4), 0]])
+src = np.float32([[img_size[0] * (1 - top_trap_width) / 2, img_size[1] * trap_height],
+                  [img_size[0] * (1 + top_trap_width) / 2, img_size[1] * trap_height],
+                  [img_size[0] * (1 + bottom_trap_width) / 2, img_size[1] * bottom_img_trim],
+                  [img_size[0] * (1 - bottom_trap_width) / 2, img_size[1] * bottom_img_trim]])
+
+offset = img_size[0] / 4
+
+dst = np.float32([[offset, 0], [img_size[0] - offset, 0], [img_size[0] - offset, img_size[1]],
+                  [offset, img_size[1]]])
 ```
 
-This resulted in the following source and destination points:
+Warped Test Image: ![alt text][image6]
 
-| Source        | Destination   |
-|:-------------:|:-------------:|
-| 585, 460      | 320, 0        |
-| 203, 720      | 320, 720      |
-| 1127, 720     | 960, 720      |
-| 695, 460      | 960, 0        |
-
-I verified that my perspective transform was working as expected by drawing the `src` and `dst` points onto a test image and its warped counterpart to verify that the lines appear parallel in the warped image.
-
-![alt text][image4]
 
 #### 4. Describe how (and identify where in your code) you identified lane-line pixels and fit their positions with a polynomial?
 
