@@ -18,7 +18,7 @@ The script (`camera_calibration.py`), images, and output (`calibration_pickle.p`
 
 The images in `test_images` are for testing the pipeline on single frames. The script (`image_gen.py`) is used to generate output for images in `test_images` and stored in `output_images`.
 
-For example, `test1.jpg`, has corresponding following output images:
+For example, `test1.jpg`, has corresponding output images:
 * `test1_undistorted.jpg` -- Distortion corrected `test1.jpg`
 * `test1_binary.jpg` -- Binary `test1.jpg`
 * `test1_warped.jpg` -- Perspective transformed `test1.jpg`
