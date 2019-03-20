@@ -87,4 +87,4 @@ Output Test Image: ![alt text][image7]
 
 ### Pipeline (video)
 
-Here is the output project video (`./project_video_output.mp4`) that identifies the lane boundaries in input project video (`./project_video.mp4`).
+The output project video (`./project_video_output.mp4`) identifies the lane boundaries in input project video (`./project_video.mp4`). Here is my [output video](./project_video_output.mp4)
