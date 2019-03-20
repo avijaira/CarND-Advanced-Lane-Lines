@@ -71,7 +71,7 @@ for idx, fname in enumerate(images):
     img = cv2.undistort(img, mtx, dist, None, mtx)
 
     # Save the Undistorted Image
-    dname = './output_images/' + fname.split('/')[2].split('.')[0] + '_output.jpg'
+    dname = './output_images/' + fname.split('/')[2].split('.')[0] + '_undistorted_output.jpg'
     cv2.imwrite(dname, img)
 
     # 2. Color/Gradient Threshold
@@ -81,6 +81,10 @@ for idx, fname in enumerate(images):
     grady = abs_sobel_thresh(img, orient='y', thresh=(24, 255))
     color_binary = color_threshold(img, s_thresh=(100, 255), v_thresh=(50, 255))
     binary_img[(gradx == 1) & (grady == 1) | (color_binary == 1)] = 255
+
+    # Save the Binary Image
+    bname = './output_images/' + fname.split('/')[2].split('.')[0] + '_bin_output.jpg'
+    cv2.imwrite(bname, binary_img)
 
     # 3. Perspective Transform
     # Perspective transform area
@@ -111,6 +115,10 @@ for idx, fname in enumerate(images):
     Minv = cv2.getPerspectiveTransform(dst, src)
     # Warp an image using the perspective transform, M
     warped_img = cv2.warpPerspective(binary_img, M, img_size)
+
+    # Save the Warped Image
+    wname = './output_images/' + fname.split('/')[2].split('.')[0] + '_warped_output.jpg'
+    cv2.imwrite(wname, warped_img)
 
     # 4. Detect Lane Lines using Convolution
     window_width = 25
