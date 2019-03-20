@@ -160,8 +160,6 @@ def process_image(img):
     # Generate x and y values for plotting
     ploty = np.linspace(0, img_size[1] - 1, img_size[1])
 
-    # What does result_yvals mean?
-    # NOTE: result_yvals is not a np.array()
     result_yvals = np.arange(img_size[1] - window_height / 2, 0, -window_height)
 
     # Fit a second order polynomial to left lane

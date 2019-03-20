@@ -1,7 +1,7 @@
 ## Advanced Lane Finding
 A pipeline to identify the lane boundaries in an image from a front-facing camera on a car.
 
-*The project goals:*
+**The project goals:**
 
 * Compute the camera calibration matrix and distortion coefficients given a set of chessboard images.
 * Apply distortion correction to raw images.
@@ -77,10 +77,26 @@ dst = np.float32(
 Warped Test Image: ![alt text][image6]
 
 
-#### 4. DDetect lane pixels and fit to find the lane boundary.
+#### 4. Detect lane pixels and fit to find the lane boundary.
+
+The code for this step is contained in the following scripts: `video_gen.py` and `tracker.py`. The lanes are detected using convolution between lines: `116-200`.
+
+My approach is to break image into 9 vertical layers, detect left and right lane pixels (by convolving the vertical image slices with the window template), fit a second order polynomial to left and right lanes, and the draw lanes.
 
 
-#### 5. Output visual display of the lane boundaries and numerical estimation of lane curvature and vehicle position.
+#### 5. Determine the curvature of the lane and vehicle position with respect to center.
+
+The code for this step is contained in the following script: `video_gen.py`. The curvature of the lane and vehicle position with respect to center is determined between lines: `210-231`.
+
+
+#### 6. Warp the detected lane boundaries back onto the original image.
+
+The code for this step is contained in the following script: `video_gen.py`. The lane boundaries are warped back on original image between lines: `202-203`.
+
+
+#### 7. Output visual display of the lane boundaries and numerical estimation of lane curvature and vehicle position.
+
+The code for this step is contained in the following script: `video_gen.py`. The numerical estimation of lane curvature and vehicle position are added to images between lines: `234-237`.
 
 Output Test Image: ![alt text][image7]
 
