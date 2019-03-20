@@ -2,7 +2,7 @@
 
 A pipeline to identify the lane boundaries in an image from a front-facing camera on a car.
 
-*The project goals:*
+**The project goals:**
 
 * Compute the camera calibration matrix and distortion coefficients given a set of chessboard images.
 * Apply a distortion correction to raw images.
