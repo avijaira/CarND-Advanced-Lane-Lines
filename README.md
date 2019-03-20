@@ -14,9 +14,11 @@ A pipeline to identify the lane boundaries in an image from a front-facing camer
 * Output visual display of the lane boundaries and numerical estimation of lane curvature and vehicle position.
 
 
-The script (`camera_calibration.py`), images, and output (`calibration_pickle.p`) for camera calibration are stored in the folder called `camera_cal`.
+**Camera calibration:**
+The script (`camera_calibration.py`), images, and output (`calibration_pickle.p`) for camera calibration are stored in the `camera_cal` directory.
 
-The images in `test_images` are for testing the pipeline on single frames. The script (`image_gen.py`) is used to generate output for images in `test_images` and stored in `output_images`.
+**Test images:**
+The images in `test_images` directory are for testing the pipeline on single frames. The script (`image_gen.py`) is used to generate output from each stage of the pipeline for all the images in `test_images`. These output images are saved in `output_images` directory.
 
 For example, `test1.jpg`, has corresponding output images:
 * `test1_undistorted.jpg` -- Distortion corrected `test1.jpg`
@@ -24,10 +26,10 @@ For example, `test1.jpg`, has corresponding output images:
 * `test1_warped.jpg` -- Perspective transformed `test1.jpg`
 * `test1_output.jpg` -- Output with lane boundaries on `test1.jpg`
 
+**Project video:**
+The script (`video_gen.py`) is used to apply the pipeline to identify the lane boundaries in input video (`project_video.mp4`), and generate the output video (`project_video_output.mp4`).
 
 
-To help the reviewer examine your work, please save examples of the output from each stage of your pipeline in the folder called `output_images`, and include a description in your writeup for the project of what each image shows. The video called `project_video.mp4` is the video your pipeline should work well on.
+## Implementation Details
 
-The `challenge_video.mp4` video is an extra (and optional) challenge for you if you want to test your pipeline under somewhat trickier conditions.  The `harder_challenge.mp4` video is another optional challenge and is brutal!
 
-If you're feeling ambitious (again, totally optional though), don't stop there!  We encourage you to go out and take video of your own, calibrate your camera and show us how you would implement this project from scratch!
