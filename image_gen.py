@@ -235,5 +235,5 @@ for idx, fname in enumerate(images):
                 (50, 100), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2)
 
     # Save the Output Image
-    wname = './output_images/tracked' + str(idx + 1) + '.jpg'
+    wname = './output_images/' + fname.split('/')[2].split('.')[0] + '_output.jpg'
     cv2.imwrite(wname, output_img)
