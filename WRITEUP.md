@@ -61,15 +61,19 @@ The code for this step is contained in the following script: `video_gen.py`. The
 I chose to hardcode the source and destination points in the following manner:
 
 ```python
-src = np.float32([[img_size[0] * (1 - top_trap_width) / 2, img_size[1] * trap_height],
-                  [img_size[0] * (1 + top_trap_width) / 2, img_size[1] * trap_height],
-                  [img_size[0] * (1 + bottom_trap_width) / 2, img_size[1] * bottom_img_trim],
-                  [img_size[0] * (1 - bottom_trap_width) / 2, img_size[1] * bottom_img_trim]])
+src = np.float32(
+    [[img_size[0] * (1 - top_trap_width) / 2, img_size[1] * trap_height],
+     [img_size[0] * (1 + top_trap_width) / 2, img_size[1] * trap_height],
+     [img_size[0] * (1 + bottom_trap_width) / 2, img_size[1] * bottom_img_trim],
+     [img_size[0] * (1 - bottom_trap_width) / 2, img_size[1] * bottom_img_trim]])
 
 offset = img_size[0] / 4
 
-dst = np.float32([[offset, 0], [img_size[0] - offset, 0], [img_size[0] - offset, img_size[1]],
-                  [offset, img_size[1]]])
+dst = np.float32(
+    [[offset, 0],
+     [img_size[0] - offset, 0],
+     [img_size[0] - offset, img_size[1]],
+     [offset, img_size[1]]])
 ```
 
 Warped Test Image: ![alt text][image6]
