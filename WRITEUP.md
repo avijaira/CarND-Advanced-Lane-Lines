@@ -4,9 +4,9 @@ A pipeline to identify the lane boundaries in an image from a front-facing camer
 *The project goals:*
 
 * Compute the camera calibration matrix and distortion coefficients given a set of chessboard images.
-* Apply a distortion correction to raw images.
+* Apply distortion correction to raw images.
 * Use color transforms, gradients, etc., to create a thresholded binary image.
-* Apply a perspective transform to rectify binary image ("birds-eye view").
+* Apply perspective transform to rectify binary image ("birds-eye view").
 * Detect lane pixels and fit to find the lane boundary.
 * Determine the curvature of the lane and vehicle position with respect to center.
 * Warp the detected lane boundaries back onto the original image.
@@ -34,26 +34,31 @@ I start by preparing "object points", which will be the (x, y, z) coordinates of
 I then used the output `objpoints` and `imgpoints` to compute the camera calibration and distortion coefficients using the `cv2.calibrateCamera()` function.  I applied this distortion correction to the test image using the `cv2.undistort()` function and obtained this result:
 
 Distorted Chessboard: ![alt text][image1]
-
 Undisorted Chessboard: ![alt text][image2]
 
 
 ### Pipeline (single images)
+The code for this pipeline is contained in the following script: `video_gen.py`.
 
-#### 1. Provide an example of a distortion-corrected image.
+#### 1. Apply distortion correction to raw images.
 
-To demonstrate this step, I will describe how I apply the distortion correction to one of the test images like this one:
-![alt text][image2]
+The code for this step is contained in the following script: `video_gen.py`. Reading saved camera matrix and distortion coefficients between lines: 8-10. Applying distortion correction in line: 75.
 
-#### 2. Describe how (and identify where in your code) you used color transforms, gradients or other methods to create a thresholded binary image.  Provide an example of a binary image result.
+Test Image: ![alt text][image3]
+Undistorted Test Image: ![alt text][image4]
 
-I used a combination of color and gradient thresholds to generate a binary image (thresholding steps at lines # through # in `another_file.py`).  Here's an example of my output for this step.  (note: this is not actually from one of the test images)
 
-![alt text][image3]
+#### 2. Use color transforms, gradients, etc., to create a thresholded binary image.
 
-#### 3. Describe how (and identify where in your code) you performed a perspective transform and provide an example of a transformed image.
+The code for this step is contained in the following script: `video_gen.py`. I used a combination of color and gradient thresholds to generate a binary image. Thresholding functions (`abs_sobel_thresh()` and `color_threshold()`) are defined between lines: 14-51. These thresholds are applied to undistored images between lines: 79-83.
 
-The code for my perspective transform includes a function called `warper()`, which appears in lines 1 through 8 in the file `example.py` (output_images/examples/example.py) (or, for example, in the 3rd code cell of the IPython notebook).  The `warper()` function takes as inputs an image (`img`), as well as source (`src`) and destination (`dst`) points.  I chose the hardcode the source and destination points in the following manner:
+Binary Test Image: ![alt text][image5]
+
+#### 3. Apply perspective transform to rectify binary image ("birds-eye view").
+
+The code for this step is contained in the following script: `video_gen.py`. The perspective transform is applied to binary images between lines: 87-113.
+
+ in lines 1 through 8 in the file `example.py` (output_images/examples/example.py) (or, for example, in the 3rd code cell of the IPython notebook).  The `warper()` function takes as inputs an image (`img`), as well as source (`src`) and destination (`dst`) points.  I chose the hardcode the source and destination points in the following manner:
 
 ```python
 src = np.float32(

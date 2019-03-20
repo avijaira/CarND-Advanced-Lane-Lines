@@ -5,9 +5,9 @@ A pipeline to identify the lane boundaries in an image from a front-facing camer
 **The project goals:**
 
 * Compute the camera calibration matrix and distortion coefficients given a set of chessboard images.
-* Apply a distortion correction to raw images.
+* Apply distortion correction to raw images.
 * Use color transforms, gradients, etc., to create a thresholded binary image.
-* Apply a perspective transform to rectify binary image ("birds-eye view").
+* Apply perspective transform to rectify binary image ("birds-eye view").
 * Detect lane pixels and fit to find the lane boundary.
 * Determine the curvature of the lane and vehicle position with respect to center.
 * Warp the detected lane boundaries back onto the original image.
@@ -32,4 +32,4 @@ The script (`video_gen.py`) is used to apply the pipeline to identify the lane b
 
 ## Implementation Details
 
-
+Please see WRITEUP.md
