@@ -70,6 +70,10 @@ for idx, fname in enumerate(images):
     # Undistorting an image using mtx and dist
     img = cv2.undistort(img, mtx, dist, None, mtx)
 
+    # Save the Undistorted Image
+    dname = './output_images/' + fname.split('/')[2].split('.')[0] + '_output.jpg'
+    cv2.imwrite(dname, img)
+
     # 2. Color/Gradient Threshold
     # Generate binary image
     binary_img = np.zeros_like(img[:, :, 0])
@@ -203,7 +207,7 @@ for idx, fname in enumerate(images):
     base_img = cv2.addWeighted(img, 1.0, road_warped_back_img, -1.0, 0.0)
     output_img = cv2.addWeighted(base_img, 1.0, road_warped_img, 0.7, 0.0)
 
-    # 5. Determine the lane curvature
+    # 5. Determine The Lane Curvature
     # Curvature of left lane
     xm_per_pix = curve_centers.xm_per_pix
     ym_per_pix = curve_centers.ym_per_pix
@@ -235,5 +239,5 @@ for idx, fname in enumerate(images):
                 (50, 100), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2)
 
     # Save the Output Image
-    wname = './output_images/' + fname.split('/')[2].split('.')[0] + '_output.jpg'
-    cv2.imwrite(wname, output_img)
+    oname = './output_images/' + fname.split('/')[2].split('.')[0] + '_output.jpg'
+    cv2.imwrite(oname, output_img)
