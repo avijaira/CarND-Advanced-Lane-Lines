@@ -48,7 +48,7 @@ Undistorted Test Image: ![alt text][image4]
 
 #### 2. Use color transforms, gradients, etc., to create a thresholded binary image.
 
-The code for this step is contained in the following script: `video_gen.py`. I used a combination of color and gradient thresholds to generate a binary image. Thresholding functions (`abs_sobel_thresh()` and `color_threshold()`) are defined between lines: `14-51`. These thresholds are applied to undistored images between lines: `79-83`.
+The code for this step is contained in the following script: `video_gen.py`. I used a combination of color and gradient thresholds to generate a binary image. Thresholding functions (`abs_sobel_thresh()` and `color_threshold()`) are defined between lines: `14-51`. These thresholds are applied to undistorted images between lines: `79-83`.
 
 Binary Test Image: ![alt text][image5]
 
@@ -104,3 +104,14 @@ Output Test Image: ![alt text][image7]
 ### Pipeline (video)
 
 The output project video (`./project_video_output.mp4`) identifies the lane boundaries in input project video (`./project_video.mp4`). Here is my [output video](./project_video_output.mp4)
+
+
+### Discussion
+
+**Drawbacks of current solution:**
+* Based on road conditions, it challenging to detect and estimate the position of lanes. Current research suggests that we can get better results with deep learning techniques as an alternative to Computer Vision techniques used in the current implementation. A Convolutional Neural Network (CNN) based solution that yields an estimate of the lane position with respect to the vehicle from raw input image.
+* Use of single front-facing camera. While driving, off-center shifts can be captured better with left and right cameras in addition to front-facing center camera.
+
+**References:**
+* DeepLanes: End-To-End Lane Position Estimation using Deep Neural Networks, by Alexandru Gurghian et al.
+* End-to-End Deep Learning for Self-Driving Cars, by Mariusz Bojarski et al.
