@@ -67,7 +67,7 @@ def process_image(img):
         [2] Color/Gradient Threshold
         [3] Perspective Transform
         [4] Detect Lane Lines using Convolution
-        [5] Determine the lane curvature
+        [5] Determine The Lane Curvature
     """
 
     # *** [1] DISTORTION CORRECTION ***
