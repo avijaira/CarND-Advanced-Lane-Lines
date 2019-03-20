@@ -3,16 +3,16 @@ import cv2
 import numpy as np
 import glob
 
-nx = 9  # the number of inside corners in x
-ny = 6  # the number of inside corners in y
+nx = 9    # the number of inside corners in x
+ny = 6    # the number of inside corners in y
 
 # prepare object points, like (0,0,0), (1,0,0), (2,0,0) ....,(6,5,0)
 objp = np.zeros((nx * ny, 3), np.float32)
 objp[:, :2] = np.mgrid[0:nx, 0:ny].T.reshape(-1, 2)
 
 # Arrays to store object points and image points from all the images.
-objpoints = []  # 3d points in real world space
-imgpoints = []  # 2d points in image plane.
+objpoints = []    # 3d points in real world space
+imgpoints = []    # 2d points in image plane.
 
 # Make a list of calibration images
 images = glob.glob('./calibration*.jpg')
@@ -39,11 +39,14 @@ for idx, fname in enumerate(images):
 img = cv2.imread('./calibration1.jpg')
 img_size = (img.shape[1], img.shape[0])
 
-ret, mtx, dist, rvecs, tvecs = cv2.calibrateCamera(objpoints, imgpoints,
-                                                   img_size, None, None)
+ret, mtx, dist, rvecs, tvecs = cv2.calibrateCamera(objpoints, imgpoints, img_size, None, None)
 
 # Save the camera calibration results
 dist_pickle = {}
 dist_pickle["mtx"] = mtx
 dist_pickle["dist"] = dist
 pickle.dump(dist_pickle, open("./calibration_pickle.p", "wb"))
+
+# Save an undistorted image
+un_img = cv2.undistort(img, mtx, dist, None, mtx)
+cv2.imwrite('./calibration1_undistorted.jpg', un_img)
