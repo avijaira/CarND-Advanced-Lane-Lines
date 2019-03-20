@@ -21,8 +21,6 @@ A pipeline to identify the lane boundaries in an image from a front-facing camer
 [image5]: ./output_images/test1_binary.jpg "Binary Test Image"
 [image6]: ./output_images/test1_warped.jpg "Warped Test Image"
 [image7]: ./output_images/test1_output.jpg "Output Test Image"
-[video1]: ./project_video.mp4 "Input Video"
-[video2]: ./project_video_output.mp4 "Output Video"
 
 
 ### Camera Calibration
@@ -89,6 +87,4 @@ Output Test Image: ![alt text][image7]
 
 ### Pipeline (video)
 
-Here is the output project video that identifies the lane boundaries in input project video:
-Input Video: ![alt text][video1]
-Output Video: ![alt text][video2]
+Here is the output project video (`./project_video_output.mp4`) that identifies the lane boundaries in input project video (`./project_video.mp4`).
