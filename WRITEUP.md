@@ -42,7 +42,7 @@ The code for this pipeline is contained in the following script: `video_gen.py`.
 
 #### 1. Apply distortion correction to raw images.
 
-The code for this step is contained in the following script: `video_gen.py`. Reading saved camera matrix and distortion coefficients between lines: 8-10. Applying distortion correction in line: 75.
+The code for this step is contained in the following script: `video_gen.py`. Reading the saved camera matrix and distortion coefficients between lines: `8-10`. Applying distortion correction in line: `75`.
 
 Test Image: ![alt text][image3]
 Undistorted Test Image: ![alt text][image4]
@@ -50,15 +50,15 @@ Undistorted Test Image: ![alt text][image4]
 
 #### 2. Use color transforms, gradients, etc., to create a thresholded binary image.
 
-The code for this step is contained in the following script: `video_gen.py`. I used a combination of color and gradient thresholds to generate a binary image. Thresholding functions (`abs_sobel_thresh()` and `color_threshold()`) are defined between lines: 14-51. These thresholds are applied to undistored images between lines: 79-83.
+The code for this step is contained in the following script: `video_gen.py`. I used a combination of color and gradient thresholds to generate a binary image. Thresholding functions (`abs_sobel_thresh()` and `color_threshold()`) are defined between lines: `14-51`. These thresholds are applied to undistored images between lines: `79-83`.
 
 Binary Test Image: ![alt text][image5]
 
 #### 3. Apply perspective transform to rectify binary image ("birds-eye view").
 
-The code for this step is contained in the following script: `video_gen.py`. The perspective transform is applied to binary images between lines: 87-113.
+The code for this step is contained in the following script: `video_gen.py`. The perspective transform is applied to binary images between lines: `87-113`.
 
- in lines 1 through 8 in the file `example.py` (output_images/examples/example.py) (or, for example, in the 3rd code cell of the IPython notebook).  The `warper()` function takes as inputs an image (`img`), as well as source (`src`) and destination (`dst`) points.  I chose the hardcode the source and destination points in the following manner:
+The `warper()` function takes as inputs an image (`img`), as well as source (`src`) and destination (`dst`) points.  I chose the hardcode the source and destination points in the following manner:
 
 ```python
 src = np.float32(
