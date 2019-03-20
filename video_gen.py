@@ -116,8 +116,8 @@ def process_image(img):
     window_width = 25
     window_height = 80    # Break image into 9 vertical layers since image height is 720
     margin = 25
-    xm = 4 / 384
-    ym = 10 / 720
+    xm = 3.7 / 700
+    ym = 30 / 720
     smooth_factor = 15
 
     curve_centers = Tracker(
@@ -223,18 +223,33 @@ def process_image(img):
     left_curverad = (
         (1 + (2 * left_fit_cr[0] * y_eval * ym_per_pix + left_fit_cr[1])**2)**1.5) / np.absolute(2 * left_fit_cr[0])
 
+    # Fit a first order polynomial to find curvature of right lane
+    right_fit_cr = np.polyfit(
+        np.array(result_yvals, np.float32) * ym_per_pix,
+        np.array(rightx, np.float32) * xm_per_pix, 2)
+    right_curverad = (
+        (1 + (2 * right_fit_cr[0] * y_eval * ym_per_pix + right_fit_cr[1])**2)**1.5) / np.absolute(2 * right_fit_cr[0])
+
     # Calculate offset of car on the road
     camera_center = (left_fitx[-1] + right_fitx[-1]) / 2
-    center_diff = (camera_center - img_size[0] / 2) * xm_per_pix
-    camera_pos = 'left'
-    if center_diff <= 0:
+    # NOTE_AV v1: center_diff = (camera_center - img_size[0] / 2) * xm_per_pix
+    center_diff = abs(camera_center - img_size[0] / 2)
+    if center_diff > img_size[0] / 2:
+        camera_pos = 'left'
+    else:
         camera_pos = 'right'
+    center_diff *= xm_per_pix    # converted from pixels to meters
 
     # Add text showing curvature and offset to output image
-    cv2.putText(output_img, 'Radius of curvature is ' + str(round(left_curverad, 3)) + 'm.', (50, 50),
+    lc = str(round(left_curverad, 3))
+    cv2.putText(output_img, 'Radius of curvature for left lane is ' + lc + 'm.', (50, 50), cv2.FONT_HERSHEY_SIMPLEX, 1,
+                (255, 255, 255), 2)
+    # rc = str(round(right_curverad, 3))
+    # cv2.putText(output_img, 'Radius of curvature: Left lane is ' + lc + 'm. Right lane is ' + rc + 'm.', (50, 50),
+    #            cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2)
+    cd = str(abs(round(center_diff, 3)))
+    cv2.putText(output_img, 'Car is ' + cd + 'm ' + camera_pos + ' of the lane center.', (50, 100),
                 cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2)
-    cv2.putText(output_img, 'Car is ' + str(abs(round(center_diff, 3))) + 'm ' + camera_pos + ' from lane center.',
-                (50, 100), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2)
 
     return output_img
 
